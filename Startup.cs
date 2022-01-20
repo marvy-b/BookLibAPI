@@ -61,8 +61,7 @@ namespace BookLibAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookLibAPI v1"));
+                
             }
 
             app.UseHttpsRedirection();
@@ -77,6 +76,8 @@ namespace BookLibAPI
             {
                 endpoints.MapControllers();
             });
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookLibAPI v1"));
         }
     }
 }
