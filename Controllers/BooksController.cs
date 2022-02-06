@@ -26,14 +26,18 @@ namespace BookLibAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<Book>> GetBooks()
         {
-            return await _bookRepository.Get();
+            var books = await _bookRepository.Get();
+            return books;
         }
         //return action of a book object because. Task is because the caller will be to awiat this method.
         //The action result provides thee flexibility to return all the types like NotFound or BadRequest for instance.
         [HttpGet("{id}")]//it puts the endpoint subpart in the id parameter.
         public async Task<ActionResult<Book>> GetBooks(int id)
         {
-            return await _bookRepository.Get(id);
+            var book = await _bookRepository.Get(id);
+            if (book is null)
+                return NotFound();
+            return Ok(book);
         }
         //Thanks to Model Binding asp.net will convert JSON in the request to a book object.
         [HttpPost]

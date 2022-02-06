@@ -1,4 +1,5 @@
-﻿using BookLibAPI.Models;
+﻿using BookLibAPI.Data;
+using BookLibAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,8 @@ namespace BookLibAPI.Repositories
 
         public async Task<Book> Get(int id)
         {
-            return await _db.Books.FindAsync(id);
+            var book = await _db.Books.FindAsync(id);
+            return book;
         }
 
         public async Task Update(Book book)
